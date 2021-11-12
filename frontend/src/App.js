@@ -1,10 +1,12 @@
-import {BrowserRouter, Route } from 'react-router-dom';
 import HomeScreen from './Screens/HomeScreen';
 import { useState } from 'react';
+import { AppBar, Toolbar, Typography } from '@mui/material';
 
 
-function App() {
 
+export default function App() {
+
+  // navScroll effect
   const [navScroll, setNavScroll] = useState(false);
 
   const addShadow = () => {
@@ -16,19 +18,25 @@ function App() {
   }
 
   window.addEventListener('scroll', addShadow);
+  // end navScroll effect
 
   return (
-  <BrowserRouter>
-    <div className="grid-container">
-      <header className={ navScroll ? "header active" : "header"}>
-      </header>
-      <main className="main">
-        <div className="content" />
-          <Route path="/" exact={true} component={HomeScreen} />
-      </main>
+    <div className="App">
+    <header className={ navScroll ? "header active" : "header"}>
+      {/* To Do: Put sx overrides in to cardStyles.js */}
+      <Toolbar sx={{display: 'flex', justifyContent: 'space-between', width: '100%'}}>
+        <Typography variant="h4" color="black" noWrap >
+          BioPlus
+        </Typography>
+        <Typography variant="h4" color="black" noWrap >
+          Portfolio
+        </Typography>
+      </Toolbar>
+    </header>
+      <AppBar position="relative" sx={{height: "10rem", bgcolor: "white", boxShadow: "none"}} />
+    <div>
+      <HomeScreen />
     </div>
-  </BrowserRouter>
+  </div>
   );
 }
-
-export default App;
